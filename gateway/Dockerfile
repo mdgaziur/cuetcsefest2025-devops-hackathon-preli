@@ -1,5 +1,7 @@
 FROM node:25-alpine3.21
 
+ARG GATEWAY_PORT
+
 WORKDIR /app
 
 # cache package installation

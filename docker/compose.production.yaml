@@ -3,6 +3,8 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
+      args:
+        - BACKEND_PORT=${BACKEND_PORT}
     environment:
       - MONGO_URI=${MONGO_URI}
       - MONGO_DATABASE=${MONGO_DATABASE}
@@ -15,6 +17,8 @@ services:
     build:
       context: ../gateway
       dockerfile: Dockerfile
+      args:
+        - GATEWAY_PORT=${GATEWAY_PORT}
     environment:
       - GATEWAY_PORT=${GATEWAY_PORT}
       - BACKEND_URL=http://backend:${BACKEND_PORT}
