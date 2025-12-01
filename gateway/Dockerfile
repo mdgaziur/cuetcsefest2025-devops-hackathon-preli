@@ -11,5 +11,6 @@ RUN yarn
 COPY ./src ./src
 
 EXPOSE $GATEWAY_PORT
+ENV NODE_ENV='production'
 
 CMD ["yarn", "start"]

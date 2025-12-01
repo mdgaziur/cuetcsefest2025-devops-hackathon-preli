@@ -14,5 +14,6 @@ COPY tsconfig.json .
 RUN yarn build
 
 EXPOSE $BACKEND_PORT
+ENV NODE_ENV='production'
 
 CMD ["yarn", "start"]
