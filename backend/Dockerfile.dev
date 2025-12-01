@@ -8,9 +8,6 @@ COPY package.json .
 # Cache package installation
 RUN yarn
 
-COPY src ./src
-COPY tsconfig.json .
-
 EXPOSE $BACKEND_PORT
 ENV NODE_ENV='development'
 
