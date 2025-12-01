@@ -10,6 +10,8 @@ services:
       - MONGO_DATABASE=${MONGO_DATABASE}
       - BACKEND_PORT=${BACKEND_PORT}
     restart: unless-stopped
+    networks:
+      - internal
     depends_on:
       - mongo
   gateway:
@@ -24,6 +26,9 @@ services:
     restart: unless-stopped
     ports:
       - 5921:5921
+    networks:
+      - internal
+      - external
     depends_on:
       - backend
 
@@ -33,7 +38,15 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - internal
     volumes:
       - db_data:/data/db
+
+networks:
+  internal:
+    internal: true
+  external:
+
 volumes:
   db_data: {}

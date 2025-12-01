@@ -12,8 +12,10 @@ services:
     restart: unless-stopped
     volumes:
       - ../backend/src:/backend/src 
-      - ../backend/package.json:/app/package.json
+      - ../backend/package.json:/backend/package.json
       - /backend/node_modules
+    networks:
+      - dev
     depends_on:
       - mongo
   gateway:
@@ -28,6 +30,8 @@ services:
     restart: unless-stopped
     ports:
       - 5921:5921
+    networks:
+      - dev
     volumes:
       - ../gateway/src:/gateway/src
       - ../gateway/package.json:/gateway/package.json
@@ -41,7 +45,12 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - dev
     volumes:
       - db_data:/data/db
+networks:
+  dev:
+    driver: bridge
 volumes:
   db_data: {}
